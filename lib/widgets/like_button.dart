@@ -1,0 +1,49 @@
+import 'package:FlutterGalleryApp/res/app_icons.dart';
+import 'package:flutter/material.dart';
+
+class LikeBtn extends StatefulWidget {
+  LikeBtn(this.likeCount, this.isLiked, {Key key}) : super(key: key);
+
+  final int likeCount;
+  final bool isLiked;
+
+  @override
+  _LikeBtnState createState() => _LikeBtnState();
+}
+
+class _LikeBtnState extends State<LikeBtn> {
+  bool isLiked;
+  int likeCount;
+
+  @override
+  void initState() {
+    super.initState();
+    isLiked = widget.isLiked;
+    likeCount = widget.likeCount;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        setState(() {
+          isLiked = !isLiked;
+          isLiked ? likeCount++ : likeCount--;
+        });
+      },
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.all(8),
+          child: Row(
+            children: <Widget>[
+              Icon(isLiked ? AppIcons.like_fill : AppIcons.like),
+              SizedBox(width: 4),
+              Text(likeCount.toString())
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
