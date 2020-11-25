@@ -1,5 +1,6 @@
 import 'package:FlutterGalleryApp/res/colors.dart';
 import 'package:FlutterGalleryApp/res/res.dart';
+import 'package:FlutterGalleryApp/screens/photo_screen.dart';
 import 'package:FlutterGalleryApp/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -14,29 +15,50 @@ class _FeedState extends State<Feed> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(itemBuilder: (BuildContext context, int index) {
-        return Column(
-          children: <Widget>[
-            _buildItem(),
-            Divider(
-              thickness: 2,
-              color: AppColors.mercury,
-            )
-          ],
-        );
-      }),
+      body: ListView.builder(
+          itemCount: 10,
+          itemBuilder: (BuildContext context, int index) {
+            return Column(
+              children: <Widget>[
+                _buildItem(),
+                Divider(
+                  thickness: 2,
+                  color: AppColors.mercury,
+                )
+              ],
+            );
+          }),
     );
   }
 
+  final String kFlutterDash =
+      'https://www.worldofroads.com/wp-content/uploads/2018/10/HK8A2092-2.jpg';
+
   Widget _buildItem() {
-    return Column(
-      children: <Widget>[
-        Photo(
-          photoLink:
-              'https://www.worldofroads.com/wp-content/uploads/2018/10/HK8A2092-2.jpg',
-        ),
-        _buildPhotoMeta()
-      ],
+    return GestureDetector(
+      onTap: () => {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => FullScreenImage()))
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Photo(
+            photoLink:
+                'https://www.worldofroads.com/wp-content/uploads/2018/10/HK8A2092-2.jpg',
+          ),
+          _buildPhotoMeta(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: Text(
+              'ggjf  yg fhfd d ghfhdg hfd fgd cgh',
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: AppStyles.h3,
+            ),
+          )
+        ],
+      ),
     );
   }
 
@@ -69,7 +91,7 @@ class _FeedState extends State<Feed> {
               )
             ],
           ),
-          LikeBtn(10, true),
+          LikeButton(likeCount: 10, isLiked: true),
         ],
       ),
     );

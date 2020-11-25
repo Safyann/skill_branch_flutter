@@ -1,25 +1,22 @@
 import 'package:FlutterGalleryApp/res/app_icons.dart';
 import 'package:flutter/material.dart';
 
-class LikeBtn extends StatefulWidget {
-  LikeBtn(this.likeCount, this.isLiked, {Key key}) : super(key: key);
-
-  final int likeCount;
-  final bool isLiked;
+class LikeButton extends StatefulWidget {
+  LikeButton({Key key, bool isLiked, int likeCount}) : super(key: key);
 
   @override
-  _LikeBtnState createState() => _LikeBtnState();
+  _LikeButtonState createState() => _LikeButtonState();
 }
 
-class _LikeBtnState extends State<LikeBtn> {
+class _LikeButtonState extends State<LikeButton> {
   bool isLiked;
   int likeCount;
 
   @override
   void initState() {
     super.initState();
-    isLiked = widget.isLiked;
-    likeCount = widget.likeCount;
+    isLiked = isLiked;
+    likeCount = likeCount;
   }
 
   @override
