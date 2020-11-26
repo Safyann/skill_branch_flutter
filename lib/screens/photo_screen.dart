@@ -45,7 +45,7 @@ class _FullScreenImageState extends State<FullScreenImage> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: <Widget>[
           Photo(
             photoLink: kFLutterDash,
           ),
@@ -63,10 +63,10 @@ class _FullScreenImageState extends State<FullScreenImage> {
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  LikeButton(2157, true),
+                children: <Widget>[
+                  LikeButton(10, true),
                   Row(
-                    children: [
+                    children: <Widget>[
                       GestureDetector(
                         onTap: () => true,
                         child: ClipRRect(
@@ -117,7 +117,7 @@ class _FullScreenImageState extends State<FullScreenImage> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Row(
-        children: [
+        children: <Widget>[
           UserAvatar('https://skill-branch.ru/img/speakers/Adechenko.jpg'),
           SizedBox(
             width: 6,
@@ -125,7 +125,7 @@ class _FullScreenImageState extends State<FullScreenImage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+            children: <Widget>[
               Text(name.toString(), style: AppStyles.h1Black),
               Text(
                 '@$userName',

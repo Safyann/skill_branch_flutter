@@ -1,4 +1,3 @@
-import 'package:FlutterGalleryApp/res/app_icons.dart';
 import 'package:FlutterGalleryApp/screens/feed_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
