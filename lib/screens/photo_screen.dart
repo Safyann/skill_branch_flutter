@@ -104,7 +104,7 @@ Widget _buildLikeAndButton() {
     children: <Widget>[
       Expanded(
         child: Center(
-          child: LikeButton(likeCount: 10, isLiked: true),
+          child: LikeButton(10, true),
         ),
       ),
       Expanded(
