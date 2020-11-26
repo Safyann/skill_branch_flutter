@@ -1,4 +1,3 @@
-import 'package:FlutterGalleryApp/res/colors.dart';
 import 'package:FlutterGalleryApp/res/res.dart';
 import 'package:FlutterGalleryApp/screens/photo_screen.dart';
 import 'package:FlutterGalleryApp/widgets/widgets.dart';
@@ -30,9 +29,6 @@ class _FeedState extends State<Feed> {
           }),
     );
   }
-
-  final String kFlutterDash =
-      'https://www.worldofroads.com/wp-content/uploads/2018/10/HK8A2092-2.jpg';
 
   Widget _buildItem() {
     return GestureDetector(
