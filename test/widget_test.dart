@@ -1,4 +1,5 @@
 import 'package:FlutterGalleryApp/res/app_icons.dart';
+import 'package:FlutterGalleryApp/screens/feed_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,7 +19,6 @@ void main() {
   });
 
   testWidgets('Photo', (WidgetTester tester) async {
-    var kFlutterDash;
     await tester.pumpWidget(
         MaterialApp(home: Photo(photoLink: kFlutterDash, key: Key('Photo'))));
 
