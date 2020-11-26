@@ -1,157 +1,139 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:FlutterGalleryApp/res/res.dart';
 import 'package:FlutterGalleryApp/widgets/widgets.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-const String kFlutterDush =
-    'https://flutter.dev/assets/404/dash_nest-c64796b59b65042a2b40fae5764c13b7477a592db79eaf04c86298dcb75b78ea.png';
+const String kFLutterDash =
+    'https://miro.medium.com/max/512/1*6Xz5i8qL9eu8RVISKIMZKQ.png';
 
 class FullScreenImage extends StatefulWidget {
-  FullScreenImage(
-      {this.altDescription, this.userName, this.name, this.photo, Key key})
+  FullScreenImage({this.userName, this.altDescription, this.name, Key key})
       : super(key: key);
 
-  final String altDescription;
   final String userName;
+  final String altDescription;
   final String name;
-  final String photo;
 
   @override
-  _FullScreenImageState createState() => _FullScreenImageState();
+  State<StatefulWidget> createState() {
+    return _FullScreenImageState();
+  }
 }
 
 class _FullScreenImageState extends State<FullScreenImage> {
+  String userName;
+  String altDescription;
+  String name;
+
+  @override
+  void initState() {
+    super.initState();
+    userName = widget.userName;
+    altDescription = widget.altDescription;
+    name = widget.name;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
       appBar: AppBar(
-        centerTitle: true,
-        elevation: 0.0,
-        title: Text(
-          'Photo',
-          style: AppStyles.h1Black.copyWith(
-            color: AppColors.black,
-          ),
-        ),
-        backgroundColor: AppColors.white,
+        title: Text('Photo'),
         leading: IconButton(
-          icon: Icon(CupertinoIcons.back, color: AppColors.manatee),
-          onPressed: () => Navigator.of(context).pop(),
+          icon: Icon(CupertinoIcons.back),
+          onPressed: () {},
         ),
       ),
       body: Column(
-        children: <Widget>[
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Photo(
-            photoLink: (widget.photo != null && widget.photo.isNotEmpty)
-                ? widget.photo
-                : kFlutterDush,
+            photoLink: kFLutterDash,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Text(
-              (widget.altDescription != null) ? widget.altDescription : '',
+              altDescription.toString(),
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
-              style: AppStyles.h3,
+              style: AppStyles.h3.copyWith(color: AppColors.black),
             ),
           ),
-          _buildPhotoMeta(widget.name, widget.userName),
-          _buildLikeAndButton(),
+          _buildPhotoMeta(),
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  LikeButton(2157, true),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () => true,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(7),
+                          child: Container(
+                            height: 36,
+                            width: 105,
+                            color: AppColors.dodgerBlue,
+                            child: Center(
+                              child: Text(
+                                'Save',
+                                style: AppStyles.h3,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 12,
+                      ),
+                      GestureDetector(
+                        onTap: () => true,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(7),
+                          child: Container(
+                            height: 36,
+                            width: 105,
+                            color: AppColors.dodgerBlue,
+                            child: Center(
+                              child: Text(
+                                'Visit',
+                                style: AppStyles.h3,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ))
         ],
       ),
     );
   }
-}
 
-Widget _buildPhotoMeta(String name, String nikName) {
-  return Padding(
-    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: <Widget>[
-            UserAvatar('https://skill-branch.ru/img/speakers/Adechenko.jpg'),
-            SizedBox(width: 6),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  name != null ? name : '',
-                  style: AppStyles.h1Black,
-                ),
-                Text(
-                  nikName != null ? '@${nikName}' : '',
-                  style: AppStyles.h5Black.copyWith(
-                    color: AppColors.manatee,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-    ),
-  );
-}
-
-Widget _buildLikeAndButton() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceAround,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: <Widget>[
-      Expanded(
-        child: Center(
-          child: LikeButton(10, true),
-        ),
-      ),
-      Expanded(
-        child: Button(
-          colour: AppColors.dodgerBlue,
-          text: 'Save',
-          onPress: () {},
-        ),
-      ),
-      Expanded(
-        child: Button(
-          colour: AppColors.dodgerBlue,
-          text: 'Visit',
-          onPress: () {},
-        ),
-      )
-    ],
-  );
-}
-
-class Button extends StatelessWidget {
-  final Color colour;
-  final String text;
-  final Function onPress;
-
-  Button({@required this.colour, this.text, this.onPress});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPress,
-      child: Container(
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: Text(
-              text,
-              style: AppStyles.h5Black.copyWith(
-                color: AppColors.white,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+  Widget _buildPhotoMeta() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      child: Row(
+        children: [
+          UserAvatar('https://skill-branch.ru/img/speakers/Adechenko.jpg'),
+          SizedBox(
+            width: 6,
           ),
-        ),
-        margin: EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
-            color: colour, borderRadius: BorderRadius.circular(10.0)),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(name.toString(), style: AppStyles.h1Black),
+              Text(
+                '@$userName',
+                style: AppStyles.h5Black.copyWith(color: AppColors.manatee),
+              )
+            ],
+          )
+        ],
       ),
     );
   }
